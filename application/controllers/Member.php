@@ -13,7 +13,7 @@ class Member extends CI_Controller{
   function index()
   {
     $this->member_model->checksession();
-    $this->load->view('home_view');
+    $this->load->view('logout_view');
   }
 
   public function login()
@@ -48,11 +48,13 @@ class Member extends CI_Controller{
 
   public function changepassword()
   {
+    $this->member_model->checksession();
     $this->load->view('changepassword_view');
   }
 
   public function changepassword2()
   {
+    $this->member_model->checksession();
     $this->load->library('form_validation');
     $this->form_validation->set_rules('oldpass', 'Old password', 'required');
     $this->form_validation->set_rules('newpass', 'New password', 'required');
@@ -65,7 +67,7 @@ class Member extends CI_Controller{
     }
     else {
       if ($this->member_model->changepassword() == TRUE) {
-        $data['result']='Change password success';
+        $data['result']='กดตรงนี้เพื่อกลับ';
       }
       else {
         $data['result']='Not change password';
