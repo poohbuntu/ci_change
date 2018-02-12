@@ -24,11 +24,12 @@ class Member_model extends CI_Model{
   public function register()
   {
     $data=array(
-      'username'=>$this->input->post('user'),
-      'value'=>md5($this->input->post('pass')),
+      'username'=>$this->input->post('username'),
+      'value'=>md5($this->input->post('password')),
       'title'=>$this->input->post('title'),
       'firstname'=>$this->input->post('firstname'),
       'lastname'=>$this->input->post('lastname'),
+      'type'=>'นพส.61',
     );
     $query=$this->db->insert('radcheck', $data);
     if ($query) {

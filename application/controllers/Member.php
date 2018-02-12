@@ -46,6 +46,30 @@ class Member extends CI_Controller{
     }
   }
 
+  public function register()
+  {
+    $this->load->view('register/register_form');
+  }
+
+  public function register2()
+  {
+    $this->load->library('form_validation');
+    $this->form_validation->set_rules('username', 'Username', 'required|is_unique[radcheck.username]');
+    $this->form_validation->set_rules('password', 'Password', 'required');
+    $this->form_validation->set_rules('title', 'คำนำหน้า', 'required');
+    $this->form_validation->set_rules('firstname', 'ชื่อ', 'required');
+    $this->form_validation->set_rules('lastname', 'นามสกุล', 'required');
+
+    if ($this->form_validation->run() == FALSE) {
+      $this->load->view('register/register_form');
+    }
+    else {
+      $this->member_model->register();
+
+      redirect('http://home.nursepolice.go.th','refresh');
+    }
+  }
+
   public function changepassword()
   {
     $this->member_model->checksession();
